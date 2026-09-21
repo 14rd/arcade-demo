@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Arcade — Structure demo</title>
+<link rel="preload" href="fonts/Switzer-Semibold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/FragmentMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wordmark">Arcade<span class="wm-note mono">Structure demo</span></div>
+  <div class="top-note mono">Studio Subtract · 09.2026</div>
+</header>
+
+<main class="stage" id="stage">
+
+  <!-- 01 CREATE -->
+  <section class="panel" id="create" aria-label="Create">
+    <div class="inner">
+      <div class="panel-head">
+        <div class="eyebrow mono">Create · Night train</div>
+        <h1>From an idea to a world.</h1>
+        <div class="t-tabs t-tabs--mini" role="tablist" aria-label="Medium" data-tabs="medium">
+          <span class="t-tabs-pill" aria-hidden="true"></span>
+          <button class="t-tab" role="tab" aria-selected="true" data-panel="medium-film">Film</button>
+          <button class="t-tab" role="tab" aria-selected="false" data-panel="medium-stills">Stills</button>
+          <button class="t-tab" role="tab" aria-selected="false" data-panel="medium-game">Game</button>
+        </div>
+      </div>
+
+      <div class="workcols">
+        <aside class="convo card">
+          <div class="convo-head">
+            <span class="role-tag mono">Your director</span>
+            <strong>Vera Kline</strong>
+            <span class="convo-sub">One conversation. One vision.</span>
+          </div>
+          <div class="msgs">
+            <div class="msg">
+              <span class="who mono">Vera → Rafi</span>
+              Start wide at waist height. Track with the courier, letting the silver case catch the ticket-window light. Hold back on the face until we reach the platform.
+            </div>
+            <div class="msg msg--outcome">
+              <span class="who mono">Outcome</span>
+              A low, restrained tracking shot with practical light.
+            </div>
+            <div class="msg">
+              <span class="who mono">Vera</span>
+              We have the spine of it. Pick the elements you want to keep, then we'll develop the opening frame.
+            </div>
+          </div>
+          <div class="convo-input">
+            <span class="ph">Message Vera…</span>
+            <button class="btn btn--small" type="button">Send</button>
+          </div>
+        </aside>
+
+        <div class="workmain">
+          <div class="group">
+            <div class="group-label mono">Elements · from your Library</div>
+            <div class="elems">
+              <button class="elem is-on" type="button"><b>The courier</b><span class="mono">Face</span></button>
+              <button class="elem is-on" type="button"><b>Silver case</b><span class="mono">Product</span></button>
+              <button class="elem is-on" type="button"><b>The station</b><span class="mono">Place</span></button>
+              <button class="elem elem--add" type="button"><b>+ Add</b><span class="mono">@ Library</span></button>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-label mono">Crew · your director chooses as needed</div>
+            <div class="crew">
+              <div class="crew-card crew-card--lead"><b>Vera Kline</b><span>Director</span><i class="mono">Lead</i></div>
+              <div class="crew-card"><b>Writer</b><span>Story &amp; script</span><i class="mono">Available</i></div>
+              <div class="crew-card"><b>Cinematographer</b><span>Camera &amp; light</span><i class="mono is-hot">Contributed</i></div>
+              <div class="crew-card"><b>Production design</b><span>Worlds &amp; objects</span><i class="mono is-hot">Contributed</i></div>
+              <div class="crew-card"><b>Casting</b><span>Characters</span><i class="mono">Available</i></div>
+              <div class="crew-card"><b>Sound</b><span>Voice &amp; sound</span><i class="mono">Available</i></div>
+              <div class="crew-card"><b>Editor</b><span>Rhythm &amp; sequence</span><i class="mono">Available</i></div>
+              <div class="crew-card"><b>Producer</b><span>Scope</span><i class="mono">Available</i></div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-label mono">The work · this session</div>
+            <div class="results">
+              <div class="result"><div class="thumb th-station"></div><div class="result-meta"><b>The last station</b><span class="mono">Use as reference</span></div></div>
+              <div class="result"><div class="thumb th-courier"></div><div class="result-meta"><b>The courier</b><span class="mono">Use as reference</span></div></div>
+              <div class="result"><div class="thumb th-case"></div><div class="result-meta"><b>The silver case</b><span class="mono">Use as reference</span></div></div>
+            </div>
+          </div>
+
+          <div class="pipeline">
+            <span class="mono">Brief</span><i>→</i><span class="mono">Plan</span><i>→</i><span class="mono">Review</span><i>→</i><span class="mono">Result</span>
+            <button class="btn btn--primary" type="button">Generate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 PROJECTS -->
+  <section class="panel" id="projects" aria-label="Projects">
+    <div class="inner inner--narrow">
+      <div class="panel-head">
+        <div class="eyebrow mono">Projects</div>
+        <h1>Everything in progress.</h1>
+        <p class="sub">A film and a game are the same object: a project, in a medium. Creations live inside the project that made them.</p>
+      </div>
+      <div class="list-tools">
+        <span class="count mono">3 projects</span>
+        <button class="btn" type="button">New project</button>
+      </div>
+      <div class="rows">
+        <a class="row" href="#create">
+          <span class="thumb thumb--row th-night"></span>
+          <span class="row-name">Night train</span>
+          <span class="row-meta mono">Film · 3 creations</span>
+          <span class="pill mono">In progress</span>
+          <span class="row-act">Open</span>
+        </a>
+        <a class="row" href="#create">
+          <span class="thumb thumb--row th-evergreen"></span>
+          <span class="row-name">Evergreen</span>
+          <span class="row-meta mono">Game · 1 creation</span>
+          <span class="pill pill--live mono">Released</span>
+          <span class="row-act">Open</span>
+        </a>
+        <a class="row" href="#create">
+          <span class="thumb thumb--row th-hours"></span>
+          <span class="row-name">After hours</span>
+          <span class="row-meta mono">Film · 2 creations</span>
+          <span class="pill pill--live mono">Released</span>
+          <span class="row-act">Open</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 LIBRARY -->
+  <section class="panel" id="library" aria-label="Library">
+    <div class="inner inner--narrow">
+      <div class="panel-head">
+        <div class="eyebrow mono">Library</div>
+        <h1>Everything you reuse.</h1>
+        <p class="sub">Upload once. It stays itself in every creation.</p>
+        <div class="t-tabs t-tabs--mini" role="tablist" aria-label="Library type" data-tabs="library">
+          <span class="t-tabs-pill" aria-hidden="true"></span>
+          <button class="t-tab" role="tab" aria-selected="true" data-panel="lib-faces">Faces</button>
+          <button class="t-tab" role="tab" aria-selected="false" data-panel="lib-products">Products</button>
+          <button class="t-tab" role="tab" aria-selected="false" data-panel="lib-images">Images</button>
+          <button class="t-tab" role="tab" aria-selected="false" data-panel="lib-prompts">Prompts</button>
+        </div>
+      </div>
+
+      <div class="tabpanel" id="lib-faces">
+        <div class="cards">
+          <div class="lib-card"><div class="thumb th-face1"></div><div class="lib-meta"><span class="mono">Face</span><b>The courier</b></div></div>
+          <div class="lib-card"><div class="thumb th-face2"></div><div class="lib-meta"><span class="mono">Face</span><b>Vera</b></div></div>
+          <div class="lib-card"><div class="thumb th-face3"></div><div class="lib-meta"><span class="mono">Face</span><b>Helene</b></div></div>
+          <div class="lib-card lib-card--add"><div class="thumb"><span>+</span></div><div class="lib-meta"><span class="mono">Face</span><b>New face</b></div></div>
+        </div>
+      </div>
+      <div class="tabpanel" id="lib-products" hidden>
+        <div class="cards">
+          <div class="lib-card"><div class="thumb th-case"></div><div class="lib-meta"><span class="mono">Product</span><b>Silver case</b></div></div>
+          <div class="lib-card"><div class="thumb th-bottle"></div><div class="lib-meta"><span class="mono">Product</span><b>Glass bottle</b></div></div>
+          <div class="lib-card lib-card--add"><div class="thumb"><span>+</span></div><div class="lib-meta"><span class="mono">Product</span><b>New product</b></div></div>
+        </div>
+      </div>
+      <div class="tabpanel" id="lib-images" hidden>
+        <div class="cards">
+          <div class="lib-card"><div class="thumb th-station"></div><div class="lib-meta"><span class="mono">Image</span><b>Station, dusk</b></div></div>
+          <div class="lib-card"><div class="thumb th-night"></div><div class="lib-meta"><span class="mono">Image</span><b>Platform light</b></div></div>
+          <div class="lib-card"><div class="thumb th-hours"></div><div class="lib-meta"><span class="mono">Image</span><b>Street, blue</b></div></div>
+          <div class="lib-card lib-card--add"><div class="thumb"><span>+</span></div><div class="lib-meta"><span class="mono">Image</span><b>Upload</b></div></div>
+        </div>
+      </div>
+      <div class="tabpanel" id="lib-prompts" hidden>
+        <div class="cards">
+          <div class="lib-card"><div class="thumb thumb--prompt"><span class="mono">015</span></div><div class="lib-meta"><span class="mono">Camera</span><b>Low angle shot</b></div></div>
+          <div class="lib-card"><div class="thumb thumb--prompt"><span class="mono">049</span></div><div class="lib-meta"><span class="mono">Lighting</span><b>Golden hour</b></div></div>
+          <div class="lib-card"><div class="thumb thumb--prompt"><span class="mono">073</span></div><div class="lib-meta"><span class="mono">Composition</span><b>Symmetry</b></div></div>
+          <div class="lib-card lib-card--add"><div class="thumb"><span>+</span></div><div class="lib-meta"><span class="mono">Prompt</span><b>Save one</b></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 CHANNEL -->
+  <section class="panel" id="channel" aria-label="Channel">
+    <div class="inner inner--narrow">
+      <div class="panel-head">
+        <div class="eyebrow mono">Channel · /creators/aurora</div>
+        <h1>Aurora Studio.</h1>
+        <p class="sub">A little cinema. A little somewhere else.</p>
+        <div class="head-actions">
+          <button class="btn" type="button">Edit profile</button>
+          <button class="btn" type="button">View channel ↗</button>
+        </div>
+      </div>
+      <div class="group-label mono">Releases · publishing happens here, and only here</div>
+      <div class="rows">
+        <div class="row">
+          <span class="thumb thumb--row th-evergreen"></span>
+          <span class="row-name">Evergreen</span>
+          <span class="row-meta mono">Browser game</span>
+          <span class="pill pill--live mono">Live · Free</span>
+          <span class="row-act">Edit</span>
+        </div>
+        <div class="row">
+          <span class="thumb thumb--row th-hours"></span>
+          <span class="row-name">After hours</span>
+          <span class="row-meta mono">Film</span>
+          <span class="pill pill--live mono">Live · Free</span>
+          <span class="row-act">Edit</span>
+        </div>
+        <div class="row">
+          <span class="thumb thumb--row th-night"></span>
+          <span class="row-name">Night train</span>
+          <span class="row-meta mono">Film</span>
+          <span class="pill mono">Draft</span>
+          <span class="row-act row-act--strong">Publish</span>
+        </div>
+      </div>
+      <p class="footnote mono">Free · Premium · Ad-supported — settings on a release, not a region.</p>
+    </div>
+  </section>
+
+  <!-- 05 COMMUNITY -->
+  <section class="panel" id="community" aria-label="Community">
+    <div class="inner inner--narrow">
+      <div class="panel-head">
+        <div class="eyebrow mono">Community</div>
+        <h1>Good work. Your next move.</h1>
+        <div class="t-tabs t-tabs--mini" role="tablist" aria-label="Community section" data-tabs="community">
+          <span class="t-tabs-pill" aria-hidden="true"></span>
+          <button class="t-tab" role="tab" aria-selected="true" data-panel="com-jobs">Job board</button>
+          <button class="t-tab" role="tab" aria-selected="false" data-panel="com-learn">Learn</button>
+          <button class="t-tab" role="tab" aria-selected="false" data-panel="com-apps">Applications</button>
+        </div>
+      </div>
+
+      <div class="tabpanel" id="com-jobs">
+        <div class="search-line">
+          <span class="search">Search a role, studio, or discipline…</span>
+          <button class="btn" type="button">Post a job</button>
+        </div>
+        <div class="chips">
+          <span class="chip mono">All disciplines</span>
+          <span class="chip mono">All engagement types</span>
+          <span class="chip mono">AI policy · Any</span>
+          <span class="chip mono">Remote only</span>
+        </div>
+        <div class="rows">
+          <div class="row">
+            <span class="row-name">Motion designer</span>
+            <span class="row-meta mono">Night Shift Films</span>
+            <span class="pill mono">Freelance · Remote</span>
+            <span class="row-act">Apply</span>
+          </div>
+          <div class="row">
+            <span class="row-name">World builder</span>
+            <span class="row-meta mono">Softplay Studio</span>
+            <span class="pill mono">Contract · Remote</span>
+            <span class="row-act">Apply</span>
+          </div>
+          <div class="row">
+            <span class="row-name">Creative director</span>
+            <span class="row-meta mono">Aurora Studio</span>
+            <span class="pill pill--live mono">New · Full-time</span>
+            <span class="row-act">Apply</span>
+          </div>
+        </div>
+        <p class="footnote mono">Applications travel with your Channel profile. One self, said once.</p>
+      </div>
+
+      <div class="tabpanel" id="com-learn" hidden>
+        <div class="rows">
+          <div class="row">
+            <span class="row-name">Direct a scene with a crew</span>
+            <span class="row-meta mono">Workshop · Live</span>
+            <span class="pill pill--live mono">Thu 19:00</span>
+            <span class="row-act">Save a seat</span>
+          </div>
+          <div class="row">
+            <span class="row-name">Faces that stay consistent</span>
+            <span class="row-meta mono">Tutorial · 12 min</span>
+            <span class="pill mono">Included</span>
+            <span class="row-act">Watch</span>
+          </div>
+          <div class="row">
+            <span class="row-name">From project to release</span>
+            <span class="row-meta mono">Guide</span>
+            <span class="pill mono">Free</span>
+            <span class="row-act">Read</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabpanel" id="com-apps" hidden>
+        <div class="rows">
+          <div class="row">
+            <span class="row-name">Motion designer — Night Shift Films</span>
+            <span class="row-meta mono">Sent 3 days ago</span>
+            <span class="pill mono">In review</span>
+            <span class="row-act">View</span>
+          </div>
+        </div>
+        <p class="footnote mono">Nothing else pending. The board is one tab away.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 SETTINGS -->
+  <section class="panel" id="settings" aria-label="Settings">
+    <div class="inner inner--narrow">
+      <div class="panel-head">
+        <div class="eyebrow mono">Settings</div>
+        <h1>You, then the studio.</h1>
+        <p class="sub">The person and the workspace, separated — so nothing has to explain where it lives.</p>
+      </div>
+      <div class="group">
+        <div class="group-label mono">Account · you</div>
+        <div class="fields">
+          <div class="field"><span class="mono">Name</span><b>Aurora</b></div>
+          <div class="field"><span class="mono">Email</span><b>aurora@studio.com</b></div>
+          <div class="field"><span class="mono">Sign-in</span><b class="is-ph">Add a password</b></div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label mono">Workspace · Aurora Studio</div>
+        <div class="fields">
+          <div class="field"><span class="mono">Members</span><b>4 people</b></div>
+          <div class="field"><span class="mono">Plan</span><b>Base · $29 /mo</b></div>
+          <div class="field">
+            <span class="mono">This month</span><b>≈ 31 of 48 videos left</b>
+            <div class="meter"><i style="width:34%"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label mono">Help</div>
+        <div class="fields">
+          <div class="field"><span class="mono">Support</span><b class="is-ph">Guides, contact, status</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="dock" aria-label="Sections">
+  <div class="t-tabs t-tabs--dock" role="tablist" data-tabs="main">
+    <span class="t-tabs-pill" aria-hidden="true"></span>
+    <button class="t-tab" role="tab" aria-selected="true"  data-section="create"><span class="n mono">01</span><span class="name">Create</span></button>
+    <button class="t-tab" role="tab" aria-selected="false" data-section="projects"><span class="n mono">02</span><span class="name">Projects</span></button>
+    <button class="t-tab" role="tab" aria-selected="false" data-section="library"><span class="n mono">03</span><span class="name">Library</span></button>
+    <button class="t-tab" role="tab" aria-selected="false" data-section="channel"><span class="n mono">04</span><span class="name">Channel</span></button>
+    <button class="t-tab" role="tab" aria-selected="false" data-section="community"><span class="n mono">05</span><span class="name">Community</span></button>
+    <button class="t-tab" role="tab" aria-selected="false" data-section="settings"><span class="n mono">06</span><span class="name">Settings</span></button>
+  </div>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
