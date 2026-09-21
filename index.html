@@ -10,7 +10,19 @@
 <link rel="preload" href="fonts/FragmentMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="locked">
+
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="gate-mark">Arcade<span class="mono">Structure demo</span></div>
+    <p class="gate-sub">A private prototype by Studio Subtract.</p>
+    <form class="gate-form" id="gate-form">
+      <input class="gate-input" id="gate-input" type="password" placeholder="Password" autocomplete="off" autofocus>
+      <button class="btn btn--primary gate-btn" type="submit">Enter</button>
+    </form>
+    <p class="gate-err mono" id="gate-err" hidden>That's not it. Try again.</p>
+  </div>
+</div>
 
 <header class="top">
   <div class="wordmark">Arcade<span class="wm-note mono">Structure demo</span></div>

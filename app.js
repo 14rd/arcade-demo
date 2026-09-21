@@ -4,6 +4,49 @@
 (function () {
   "use strict";
 
+  /* ---------------- gate ---------------- */
+  var GATE_HASH = "60d194c6f504e1f2140a8df17fd37d0a3d9c44b1a75917096502ad166d6d6748";
+  var GATE_KEY = "arcade-gate";
+  var gateEl = document.getElementById("gate");
+  var gateForm = document.getElementById("gate-form");
+  var gateInput = document.getElementById("gate-input");
+  var gateErr = document.getElementById("gate-err");
+
+  function sha256Hex(text) {
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+        return b.toString(16).padStart(2, "0");
+      }).join("");
+    });
+  }
+  function unlock() {
+    document.body.classList.remove("locked");
+    try { sessionStorage.setItem(GATE_KEY, GATE_HASH); } catch (e) {}
+    window.dispatchEvent(new Event("resize"));
+  }
+  try {
+    if (sessionStorage.getItem(GATE_KEY) === GATE_HASH) document.body.classList.remove("locked");
+  } catch (e) {}
+  gateForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var value = gateInput.value;
+    if (!value) return;
+    if (!(window.crypto && crypto.subtle)) {
+      gateErr.hidden = false;
+      gateErr.textContent = "This browser can't verify the password. Use HTTPS.";
+      return;
+    }
+    sha256Hex(value).then(function (hex) {
+      if (hex === GATE_HASH) {
+        unlock();
+      } else {
+        gateErr.hidden = false;
+        gateErr.textContent = "That's not it. Try again.";
+        gateInput.select();
+      }
+    });
+  });
+
   var SECTIONS = ["create", "projects", "library", "channel", "community", "settings"];
   var stage = document.getElementById("stage");
   var dock = document.querySelector('[data-tabs="main"]');
