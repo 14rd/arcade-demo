@@ -31,6 +31,9 @@
       t.setAttribute("tabindex", t === tab ? "0" : "-1");
     });
     movePill(tabs, tab, instant);
+    if (!instant && tab && tab.scrollIntoView) {
+      tab.scrollIntoView({ block: "nearest", inline: "nearest" });
+    }
   }
 
   function activeTab(tabs) {
@@ -38,16 +41,31 @@
   }
 
   /* ---------- content tab groups (mini pills swap tabpanels) ---------- */
+  function activateContentTab(tabs, tab) {
+    selectTab(tabs, tab, false);
+    var panelId = tab.getAttribute("data-panel");
+    if (!panelId) return;
+    var prefix = panelId.slice(0, panelId.indexOf("-") + 1);
+    tabs.closest(".panel").querySelectorAll('.tabpanel[id^="' + prefix + '"]').forEach(function (p) {
+      p.hidden = p.id !== panelId;
+    });
+  }
+
   function initContentTabs(tabs) {
-    tabs.querySelectorAll(".t-tab").forEach(function (tab) {
+    var all = Array.prototype.slice.call(tabs.querySelectorAll(".t-tab"));
+    all.forEach(function (tab) {
       tab.addEventListener("click", function () {
-        selectTab(tabs, tab, false);
-        var panelId = tab.getAttribute("data-panel");
-        if (!panelId) return;
-        tabs.closest(".panel").querySelectorAll(".tabpanel").forEach(function (p) {
-          p.hidden = p.id !== panelId;
-        });
+        activateContentTab(tabs, tab);
       });
+    });
+    tabs.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      var idx = all.indexOf(activeTab(tabs));
+      var next = e.key === "ArrowRight" ? idx + 1 : idx - 1;
+      if (next < 0 || next >= all.length) return;
+      e.preventDefault();
+      activateContentTab(tabs, all[next]);
+      all[next].focus();
     });
   }
 
@@ -82,12 +100,18 @@
   /* keyboard: arrows move between sections when focus isn't in a mini group */
   document.addEventListener("keydown", function (e) {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    if (e.altKey || e.metaKey || e.ctrlKey || e.shiftKey) return;
     if (e.target.closest && e.target.closest('.t-tabs--mini')) return;
     var current = SECTIONS.indexOf((location.hash || "#create").slice(1));
     if (current < 0) current = 0;
     var next = e.key === "ArrowRight" ? current + 1 : current - 1;
     if (next < 0 || next >= SECTIONS.length) return;
     goTo(SECTIONS[next], false);
+    var tab = dock.querySelector('[data-section="' + SECTIONS[next] + '"]');
+    if (tab && document.activeElement && document.activeElement.closest &&
+        document.activeElement.closest(".t-tabs--dock")) {
+      tab.focus();
+    }
   });
 
   /* in-page links (#create etc.) and back/forward */
@@ -123,8 +147,13 @@
   }
 
   if (document.fonts && document.fonts.ready) {
-    // measure after fonts load so pill widths match final metrics
-    document.fonts.ready.then(boot);
+    // re-measure after fonts load so pill widths match final metrics —
+    // measure only, never goTo, so an in-flight slide is not interrupted
+    document.fonts.ready.then(function () {
+      document.querySelectorAll(".t-tabs").forEach(function (tabs) {
+        movePill(tabs, activeTab(tabs), true);
+      });
+    });
   }
   boot();
 })();

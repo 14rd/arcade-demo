@@ -26,9 +26,9 @@
         <h1>From an idea to a world.</h1>
         <div class="t-tabs t-tabs--mini" role="tablist" aria-label="Medium" data-tabs="medium">
           <span class="t-tabs-pill" aria-hidden="true"></span>
-          <button class="t-tab" role="tab" aria-selected="true" data-panel="medium-film">Film</button>
-          <button class="t-tab" role="tab" aria-selected="false" data-panel="medium-stills">Stills</button>
-          <button class="t-tab" role="tab" aria-selected="false" data-panel="medium-game">Game</button>
+          <button class="t-tab" role="tab" id="tab-medium-film" aria-selected="true" aria-controls="medium-film" data-panel="medium-film">Film</button>
+          <button class="t-tab" role="tab" id="tab-medium-stills" aria-selected="false" aria-controls="medium-stills" data-panel="medium-stills">Stills</button>
+          <button class="t-tab" role="tab" id="tab-medium-game" aria-selected="false" aria-controls="medium-game" data-panel="medium-game">Game</button>
         </div>
       </div>
 
@@ -60,6 +60,8 @@
         </aside>
 
         <div class="workmain">
+          <div class="tabpanel" id="medium-film" role="tabpanel" aria-labelledby="tab-medium-film">
+          <div class="workstack">
           <div class="group">
             <div class="group-label mono">Elements · from your Library</div>
             <div class="elems">
@@ -96,6 +98,60 @@
           <div class="pipeline">
             <span class="mono">Brief</span><i>→</i><span class="mono">Plan</span><i>→</i><span class="mono">Review</span><i>→</i><span class="mono">Result</span>
             <button class="btn btn--primary" type="button">Generate</button>
+          </div>
+          </div>
+          </div>
+
+          <div class="tabpanel" id="medium-stills" role="tabpanel" aria-labelledby="tab-medium-stills" hidden>
+          <div class="workstack">
+            <div class="group">
+              <div class="group-label mono">Elements · from your Library</div>
+              <div class="elems">
+                <button class="elem is-on" type="button"><b>The courier</b><span class="mono">Face</span></button>
+                <button class="elem is-on" type="button"><b>Silver case</b><span class="mono">Product</span></button>
+                <button class="elem elem--add" type="button"><b>+ Add</b><span class="mono">@ Library</span></button>
+              </div>
+            </div>
+            <div class="group">
+              <div class="group-label mono">The work · stills</div>
+              <div class="results">
+                <div class="result"><div class="thumb th-station"></div><div class="result-meta"><b>Platform, dusk</b><span class="mono">Use as reference</span></div></div>
+                <div class="result"><div class="thumb th-case"></div><div class="result-meta"><b>Case, ticket light</b><span class="mono">Use as reference</span></div></div>
+                <div class="result"><div class="thumb th-night"></div><div class="result-meta"><b>The opening frame</b><span class="mono">Use as reference</span></div></div>
+              </div>
+            </div>
+            <div class="pipeline">
+              <span class="mono">Brief</span><i>→</i><span class="mono">Plan</span><i>→</i><span class="mono">Review</span><i>→</i><span class="mono">Result</span>
+              <button class="btn btn--primary" type="button">Generate</button>
+            </div>
+          </div>
+          </div>
+
+          <div class="tabpanel" id="medium-game" role="tabpanel" aria-labelledby="tab-medium-game" hidden>
+          <div class="workstack">
+            <div class="group">
+              <div class="group-label mono">Build a world people can play</div>
+              <div class="stepper">
+                <span class="step is-on"><span class="n">01</span>World</span>
+                <span class="step"><span class="n">02</span>3D models</span>
+                <span class="step"><span class="n">03</span>Gameplay</span>
+                <span class="step"><span class="n">04</span>Playtest</span>
+                <span class="step"><span class="n">05</span>Release</span>
+              </div>
+            </div>
+            <div class="group">
+              <div class="group-label mono">Choose your environment</div>
+              <div class="envs">
+                <div class="env is-on"><div class="thumb th-evergreen"></div><div class="env-meta"><b>Evergreen</b><span>Quiet woods. Room to explore.</span></div></div>
+                <div class="env"><div class="thumb th-dune"></div><div class="env-meta"><b>Dune country</b><span>Warm light. Endless possibility.</span></div></div>
+                <div class="env"><div class="thumb th-hours"></div><div class="env-meta"><b>After hours</b><span>A world on the other side of dusk.</span></div></div>
+              </div>
+            </div>
+            <div class="pipeline">
+              <span class="mono">World</span><i>→</i><span class="mono">Models</span><i>→</i><span class="mono">Gameplay</span><i>→</i><span class="mono">Playtest</span>
+              <button class="btn btn--primary" type="button">Playtest</button>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -149,14 +205,14 @@
         <p class="sub">Upload once. It stays itself in every creation.</p>
         <div class="t-tabs t-tabs--mini" role="tablist" aria-label="Library type" data-tabs="library">
           <span class="t-tabs-pill" aria-hidden="true"></span>
-          <button class="t-tab" role="tab" aria-selected="true" data-panel="lib-faces">Faces</button>
-          <button class="t-tab" role="tab" aria-selected="false" data-panel="lib-products">Products</button>
-          <button class="t-tab" role="tab" aria-selected="false" data-panel="lib-images">Images</button>
-          <button class="t-tab" role="tab" aria-selected="false" data-panel="lib-prompts">Prompts</button>
+          <button class="t-tab" role="tab" id="tab-lib-faces" aria-selected="true" aria-controls="lib-faces" data-panel="lib-faces">Faces</button>
+          <button class="t-tab" role="tab" id="tab-lib-products" aria-selected="false" aria-controls="lib-products" data-panel="lib-products">Products</button>
+          <button class="t-tab" role="tab" id="tab-lib-images" aria-selected="false" aria-controls="lib-images" data-panel="lib-images">Images</button>
+          <button class="t-tab" role="tab" id="tab-lib-prompts" aria-selected="false" aria-controls="lib-prompts" data-panel="lib-prompts">Prompts</button>
         </div>
       </div>
 
-      <div class="tabpanel" id="lib-faces">
+      <div class="tabpanel" id="lib-faces" role="tabpanel" aria-labelledby="tab-lib-faces">
         <div class="cards">
           <div class="lib-card"><div class="thumb th-face1"></div><div class="lib-meta"><span class="mono">Face</span><b>The courier</b></div></div>
           <div class="lib-card"><div class="thumb th-face2"></div><div class="lib-meta"><span class="mono">Face</span><b>Vera</b></div></div>
@@ -164,14 +220,14 @@
           <div class="lib-card lib-card--add"><div class="thumb"><span>+</span></div><div class="lib-meta"><span class="mono">Face</span><b>New face</b></div></div>
         </div>
       </div>
-      <div class="tabpanel" id="lib-products" hidden>
+      <div class="tabpanel" id="lib-products" role="tabpanel" aria-labelledby="tab-lib-products" hidden>
         <div class="cards">
           <div class="lib-card"><div class="thumb th-case"></div><div class="lib-meta"><span class="mono">Product</span><b>Silver case</b></div></div>
           <div class="lib-card"><div class="thumb th-bottle"></div><div class="lib-meta"><span class="mono">Product</span><b>Glass bottle</b></div></div>
           <div class="lib-card lib-card--add"><div class="thumb"><span>+</span></div><div class="lib-meta"><span class="mono">Product</span><b>New product</b></div></div>
         </div>
       </div>
-      <div class="tabpanel" id="lib-images" hidden>
+      <div class="tabpanel" id="lib-images" role="tabpanel" aria-labelledby="tab-lib-images" hidden>
         <div class="cards">
           <div class="lib-card"><div class="thumb th-station"></div><div class="lib-meta"><span class="mono">Image</span><b>Station, dusk</b></div></div>
           <div class="lib-card"><div class="thumb th-night"></div><div class="lib-meta"><span class="mono">Image</span><b>Platform light</b></div></div>
@@ -179,7 +235,7 @@
           <div class="lib-card lib-card--add"><div class="thumb"><span>+</span></div><div class="lib-meta"><span class="mono">Image</span><b>Upload</b></div></div>
         </div>
       </div>
-      <div class="tabpanel" id="lib-prompts" hidden>
+      <div class="tabpanel" id="lib-prompts" role="tabpanel" aria-labelledby="tab-lib-prompts" hidden>
         <div class="cards">
           <div class="lib-card"><div class="thumb thumb--prompt"><span class="mono">015</span></div><div class="lib-meta"><span class="mono">Camera</span><b>Low angle shot</b></div></div>
           <div class="lib-card"><div class="thumb thumb--prompt"><span class="mono">049</span></div><div class="lib-meta"><span class="mono">Lighting</span><b>Golden hour</b></div></div>
@@ -238,13 +294,13 @@
         <h1>Good work. Your next move.</h1>
         <div class="t-tabs t-tabs--mini" role="tablist" aria-label="Community section" data-tabs="community">
           <span class="t-tabs-pill" aria-hidden="true"></span>
-          <button class="t-tab" role="tab" aria-selected="true" data-panel="com-jobs">Job board</button>
-          <button class="t-tab" role="tab" aria-selected="false" data-panel="com-learn">Learn</button>
-          <button class="t-tab" role="tab" aria-selected="false" data-panel="com-apps">Applications</button>
+          <button class="t-tab" role="tab" id="tab-com-jobs" aria-selected="true" aria-controls="com-jobs" data-panel="com-jobs">Job board</button>
+          <button class="t-tab" role="tab" id="tab-com-learn" aria-selected="false" aria-controls="com-learn" data-panel="com-learn">Learn</button>
+          <button class="t-tab" role="tab" id="tab-com-apps" aria-selected="false" aria-controls="com-apps" data-panel="com-apps">Applications</button>
         </div>
       </div>
 
-      <div class="tabpanel" id="com-jobs">
+      <div class="tabpanel" id="com-jobs" role="tabpanel" aria-labelledby="tab-com-jobs">
         <div class="search-line">
           <span class="search">Search a role, studio, or discipline…</span>
           <button class="btn" type="button">Post a job</button>
@@ -278,7 +334,7 @@
         <p class="footnote mono">Applications travel with your Channel profile. One self, said once.</p>
       </div>
 
-      <div class="tabpanel" id="com-learn" hidden>
+      <div class="tabpanel" id="com-learn" role="tabpanel" aria-labelledby="tab-com-learn" hidden>
         <div class="rows">
           <div class="row">
             <span class="row-name">Direct a scene with a crew</span>
@@ -301,7 +357,7 @@
         </div>
       </div>
 
-      <div class="tabpanel" id="com-apps" hidden>
+      <div class="tabpanel" id="com-apps" role="tabpanel" aria-labelledby="tab-com-apps" hidden>
         <div class="rows">
           <div class="row">
             <span class="row-name">Motion designer — Night Shift Films</span>
