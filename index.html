@@ -14,10 +14,10 @@
 
 <header class="top">
   <div class="wordmark">Arcade<span class="wm-note mono">Structure demo</span></div>
-  <div class="t-tabs t-tabs--mode" role="tablist" aria-label="Platform mode" data-tabs="mode">
+  <div class="t-tabs t-tabs--mode" role="group" aria-label="Platform mode" data-tabs="mode">
     <span class="t-tabs-pill" aria-hidden="true"></span>
-    <button class="t-tab" role="tab" id="mode-studio" aria-selected="true" type="button">Studio</button>
-    <button class="t-tab" role="tab" id="mode-watch" aria-selected="false" type="button">Watch</button>
+    <button class="t-tab" id="mode-studio" aria-pressed="true" type="button">Studio</button>
+    <button class="t-tab" id="mode-watch" aria-pressed="false" type="button">Watch</button>
   </div>
   <div class="top-note mono">Studio Subtract · 09.2026</div>
 </header>
@@ -25,7 +25,7 @@
 <main class="stage" id="stage">
 
   <!-- 01 CREATE -->
-  <section class="panel" id="create" aria-label="Create">
+  <section class="panel" id="create" role="tabpanel" aria-label="Create">
     <div class="inner">
       <div class="panel-head">
         <div class="eyebrow mono">Create · Night train</div>
@@ -175,7 +175,7 @@
   </section>
 
   <!-- 02 PROJECTS -->
-  <section class="panel" id="projects" aria-label="Projects">
+  <section class="panel" id="projects" role="tabpanel" aria-label="Projects">
     <div class="inner inner--narrow">
       <div id="project-list">
         <div class="panel-head">
@@ -218,7 +218,7 @@
   </section>
 
   <!-- 03 LIBRARY -->
-  <section class="panel" id="library" aria-label="Library">
+  <section class="panel" id="library" role="tabpanel" aria-label="Library">
     <div class="inner inner--narrow">
       <div class="panel-head">
         <div class="eyebrow mono">Library</div>
@@ -295,7 +295,7 @@
   </section>
 
   <!-- 04 CHANNEL -->
-  <section class="panel" id="channel" aria-label="Channel">
+  <section class="panel" id="channel" role="tabpanel" aria-label="Channel">
     <div class="inner inner--narrow">
       <div class="panel-head">
         <div class="eyebrow mono">Channel · /aurora</div>
@@ -321,7 +321,7 @@
           <div class="channel-id">
             <span class="mono">Welcome to my world</span>
             <b>Aurora Studio</b>
-            <span class="dim">@aurora · <span id="pub-count">2</span> live releases</span>
+            <span class="dim">@aurora · <span id="pub-count">2 live releases</span></span>
           </div>
         </div>
         <div class="cards" id="public-grid"></div>
@@ -339,7 +339,7 @@
   </section>
 
   <!-- 05 COMMUNITY -->
-  <section class="panel" id="community" aria-label="Community">
+  <section class="panel" id="community" role="tabpanel" aria-label="Community">
     <div class="inner inner--narrow">
       <div class="panel-head">
         <div class="eyebrow mono">Community</div>
@@ -390,7 +390,7 @@
   </section>
 
   <!-- 06 SETTINGS -->
-  <section class="panel" id="settings" aria-label="Settings">
+  <section class="panel" id="settings" role="tabpanel" aria-label="Settings">
     <div class="inner inner--narrow">
       <div class="panel-head">
         <div class="eyebrow mono">Settings</div>
@@ -460,13 +460,52 @@
 <nav class="dock" id="dock-nav" aria-label="Sections">
   <div class="t-tabs t-tabs--dock" role="tablist" data-tabs="main">
     <span class="t-tabs-pill" aria-hidden="true"></span>
-    <button class="t-tab" role="tab" aria-selected="true"  data-section="create" type="button"><span class="n mono">01</span><span class="name">Create</span></button>
-    <button class="t-tab" role="tab" aria-selected="false" data-section="projects" type="button"><span class="n mono">02</span><span class="name">Projects</span></button>
-    <button class="t-tab" role="tab" aria-selected="false" data-section="library" type="button"><span class="n mono">03</span><span class="name">Library</span></button>
-    <button class="t-tab" role="tab" aria-selected="false" data-section="channel" type="button"><span class="n mono">04</span><span class="name">Channel</span></button>
-    <button class="t-tab" role="tab" aria-selected="false" data-section="community" type="button"><span class="n mono">05</span><span class="name">Community</span></button>
-    <button class="t-tab" role="tab" aria-selected="false" data-section="settings" type="button"><span class="n mono">06</span><span class="name">Settings</span></button>
+    <button class="t-tab" role="tab" aria-selected="true"  aria-controls="create" data-section="create" type="button">Create</button>
+    <button class="t-tab" role="tab" aria-selected="false" aria-controls="projects" data-section="projects" type="button">Projects</button>
+    <button class="t-tab" role="tab" aria-selected="false" aria-controls="library" data-section="library" type="button">Library</button>
+    <button class="t-tab" role="tab" aria-selected="false" aria-controls="channel" data-section="channel" type="button">Channel</button>
+    <button class="t-tab" role="tab" aria-selected="false" aria-controls="community" data-section="community" type="button">Community</button>
+    <button class="t-tab" role="tab" aria-selected="false" aria-controls="settings" data-section="settings" type="button">Settings</button>
   </div>
+</nav>
+
+<nav class="gooey" id="gooey" aria-label="Sections" data-open="false">
+  <svg class="gooey-goo" viewBox="0 0 240 486" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="goo-filter" filterUnits="userSpaceOnUse" x="-80" y="-80" width="400" height="646" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+        <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"/>
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" result="shape"/>
+        <feGaussianBlur in="shape" stdDeviation="9" result="sh-b"/>
+        <feOffset in="sh-b" dy="6" result="sh-o"/>
+        <feFlood flood-color="#000000" flood-opacity="0.22" result="sh-c"/>
+        <feComposite in="sh-c" in2="sh-o" operator="in" result="sh"/>
+        <feMerge>
+          <feMergeNode in="sh"/>
+          <feMergeNode in="shape"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <g filter="url(#goo-filter)">
+      <rect class="goo-blob" x="42" y="430" width="156" height="48" rx="24" style="--fy:-336px; --i:5;"/>
+      <rect class="goo-blob" x="42" y="430" width="156" height="48" rx="24" style="--fy:-280px; --i:4;"/>
+      <rect class="goo-blob" x="42" y="430" width="156" height="48" rx="24" style="--fy:-224px; --i:3;"/>
+      <rect class="goo-blob" x="42" y="430" width="156" height="48" rx="24" style="--fy:-168px; --i:2;"/>
+      <rect class="goo-blob" x="42" y="430" width="156" height="48" rx="24" style="--fy:-112px; --i:1;"/>
+      <rect class="goo-blob" x="42" y="430" width="156" height="48" rx="24" style="--fy:-56px;  --i:0;"/>
+      <rect class="goo-blob goo-blob--base" x="42" y="430" width="156" height="48" rx="24"/>
+    </g>
+  </svg>
+  <button class="gooey-item" style="--fy:-336px; --i:5;" data-section="create" type="button" tabindex="-1">Create</button>
+  <button class="gooey-item" style="--fy:-280px; --i:4;" data-section="projects" type="button" tabindex="-1">Projects</button>
+  <button class="gooey-item" style="--fy:-224px; --i:3;" data-section="library" type="button" tabindex="-1">Library</button>
+  <button class="gooey-item" style="--fy:-168px; --i:2;" data-section="channel" type="button" tabindex="-1">Channel</button>
+  <button class="gooey-item" style="--fy:-112px; --i:1;" data-section="community" type="button" tabindex="-1">Community</button>
+  <button class="gooey-item" style="--fy:-56px;  --i:0;" data-section="settings" type="button" tabindex="-1">Settings</button>
+  <button class="gooey-launcher" id="gooey-launcher" aria-expanded="false" type="button">
+    <span id="gooey-label">Create</span>
+    <span class="gooey-x" aria-hidden="true">+</span>
+  </button>
 </nav>
 
 <div class="toast mono" id="toast" role="status"></div>

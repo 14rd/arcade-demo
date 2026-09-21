@@ -40,7 +40,15 @@
     movePill(tabs, tab, instant);
     if (!instant && tab.scrollIntoView) tab.scrollIntoView({ block: "nearest", inline: "nearest" });
   }
-  function activeTab(tabs) { return tabs.querySelector('.t-tab[aria-selected="true"]'); }
+  function activeTab(tabs) {
+    return tabs.querySelector('.t-tab[aria-selected="true"], .t-tab[aria-pressed="true"]');
+  }
+  function selectPressed(tabs, btn, instant) {
+    tabs.querySelectorAll(".t-tab").forEach(function (t) {
+      t.setAttribute("aria-pressed", t === btn ? "true" : "false");
+    });
+    movePill(tabs, btn, instant);
+  }
 
   function activateContentTab(tabs, tab) {
     selectTab(tabs, tab, false);
@@ -76,6 +84,7 @@
     stage.style.transform = "translateX(" + (idx * -100) + "vw)";
     if (instant) { void stage.offsetWidth; stage.style.transition = ""; }
     selectTab(dock, dock.querySelector('[data-section="' + section + '"]'), instant);
+    syncGooey(section);
     if (!fromHash && "#" + section !== location.hash) history.replaceState(null, "", "#" + section);
   }
   dock.querySelectorAll(".t-tab").forEach(function (tab) {
@@ -103,8 +112,12 @@
 
   window.addEventListener("hashchange", function () {
     var section = location.hash.slice(1);
-    if (section === "watch") { setMode("watch"); return; }
-    if (SECTIONS.indexOf(section) >= 0) { setMode("studio"); goTo(section, false, true); }
+    if (section === "watch") { setMode("watch", true); return; }
+    if (SECTIONS.indexOf(section) >= 0) {
+      lastStudioSection = section;
+      setMode("studio", true);
+      goTo(section, false, true);
+    }
   });
 
   var resizeTimer;
@@ -126,25 +139,35 @@
   var watchOn = false;
   var watchEl = document.getElementById("watch");
   var dockNav = document.getElementById("dock-nav");
+  var gooeyNav = document.getElementById("gooey");
   var modeTabs = document.querySelector('[data-tabs="mode"]');
   var modeBtns = modeTabs.querySelectorAll(".t-tab");
+  var lastStudioSection = "create";
 
-  function setMode(mode) {
+  function setMode(mode, viaHistory) {
     var toWatch = mode === "watch";
     if (toWatch === watchOn) {
-      selectTab(modeTabs, modeBtns[toWatch ? 1 : 0], false);
+      selectPressed(modeTabs, modeBtns[toWatch ? 1 : 0], false);
       return;
     }
     watchOn = toWatch;
     watchEl.hidden = !watchOn;
     dockNav.classList.toggle("is-hidden", watchOn);
-    selectTab(modeTabs, modeBtns[watchOn ? 1 : 0], false);
+    gooeyNav.classList.toggle("is-hidden", watchOn);
+    stage.toggleAttribute("inert", watchOn);
+    dockNav.toggleAttribute("inert", watchOn);
+    gooeyNav.toggleAttribute("inert", watchOn);
+    selectPressed(modeTabs, modeBtns[watchOn ? 1 : 0], false);
     if (watchOn) {
+      lastStudioSection = currentSection();
+      closeGooey();
       renderWatch();
-      history.replaceState(null, "", "#watch");
+      if (!viaHistory) history.pushState(null, "", "#watch");
+      watchEl.setAttribute("tabindex", "-1");
+      watchEl.focus({ preventScroll: true });
     } else {
-      history.replaceState(null, "", "#" + currentSection());
-      goTo(currentSection(), true, true);
+      if (!viaHistory) history.replaceState(null, "", "#" + lastStudioSection);
+      goTo(lastStudioSection, true, true);
     }
   }
   modeBtns[0].addEventListener("click", function () { setMode("studio"); });
@@ -179,8 +202,9 @@
         "</div>";
     }).join("");
     var live = RELEASES.filter(function (r) { return r.status === "published"; }).length;
-    document.getElementById("pub-count").textContent = live;
-    document.getElementById("watch-aurora-count").textContent = live + " releases · Short film / Exploration";
+    var word = live === 1 ? "release" : "releases";
+    document.getElementById("pub-count").textContent = live + " live " + word;
+    document.getElementById("watch-aurora-count").textContent = live + " " + word + " · Short film / Exploration";
     renderPublicGrid();
     if (watchOn) renderWatch();
   }
@@ -260,12 +284,16 @@
   var chatStep = 0;
   var busy = false;
 
+  function nearBottom() {
+    return msgs.scrollHeight - msgs.scrollTop - msgs.clientHeight < 48;
+  }
   function addMsg(html, cls) {
+    var stick = nearBottom();
     var div = document.createElement("div");
     div.className = "msg" + (cls ? " " + cls : "");
     div.innerHTML = html;
     msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
+    if (stick) msgs.scrollTop = msgs.scrollHeight;
     return div;
   }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, reduced ? 60 : ms); }); }
@@ -308,6 +336,7 @@
     var typing = addMsg("Planning and pricing can take a minute…", "msg--typing");
     return wait(1200).then(function () {
       typing.remove();
+      var stick = nearBottom();
       var card = document.createElement("div");
       card.className = "msg plan-card";
       card.innerHTML =
@@ -320,7 +349,7 @@
         '<div class="plan-progress" hidden><i></i></div>' +
         '<span class="plan-note">Review the exact plan before generation.</span>';
       msgs.appendChild(card);
-      msgs.scrollTop = msgs.scrollHeight;
+      if (stick) msgs.scrollTop = msgs.scrollHeight;
       veraStatus.textContent = "Awaiting your approval.";
       card.querySelector("#adjust-btn").addEventListener("click", function () {
         toast("Counts, models, length, aspect and sound are adjustable — the plan reprices.");
@@ -330,6 +359,9 @@
   }
 
   function approvePlan(card) {
+    if (card.dataset.approved) return;
+    card.dataset.approved = "1";
+    busy = true;
     var actions = card.querySelector(".plan-actions");
     var note = card.querySelector(".plan-note");
     var prog = card.querySelector(".plan-progress");
@@ -363,6 +395,7 @@
       } else {
         note.textContent = "Generation complete — delivered to The work and Creations.";
         veraStatus.textContent = "Ready for your brief.";
+        busy = false;
         toast("3 of 3 delivered. Keep the conversation going to iterate.");
       }
     }
@@ -453,7 +486,7 @@
   function renderPrompts() {
     var list = PROMPTS.filter(function (p) {
       var okCat = promptCat === "all" || p[2] === promptCat;
-      var okQ = !promptQuery || (p[1] + " " + p[2] + " " + p[4]).toLowerCase().indexOf(promptQuery) >= 0;
+      var okQ = !promptQuery || (p[1] + " " + p[2] + " " + p[3] + " " + p[4]).toLowerCase().indexOf(promptQuery) >= 0;
       return okCat && okQ;
     });
     promptGrid.innerHTML = list.length ? list.map(function (p) {
@@ -560,6 +593,46 @@
     toast(on ? "Overage off. Generation pauses when the window is spent."
              : "Overage on. Usage past the window bills per use.");
   });
+
+  /* ---------------- gooey menu (mobile) ---------------- */
+  var gooeyLauncher = document.getElementById("gooey-launcher");
+  var gooeyLabel = document.getElementById("gooey-label");
+  var gooeyItems = gooeyNav.querySelectorAll(".gooey-item");
+
+  function gooeyOpen() { return gooeyNav.getAttribute("data-open") === "true"; }
+  function closeGooey() {
+    gooeyNav.setAttribute("data-open", "false");
+    gooeyLauncher.setAttribute("aria-expanded", "false");
+    gooeyItems.forEach(function (b) { b.setAttribute("tabindex", "-1"); });
+  }
+  function openGooey() {
+    gooeyNav.setAttribute("data-open", "true");
+    gooeyLauncher.setAttribute("aria-expanded", "true");
+    gooeyItems.forEach(function (b) { b.setAttribute("tabindex", "0"); });
+  }
+  gooeyLauncher.addEventListener("click", function () {
+    gooeyOpen() ? closeGooey() : openGooey();
+  });
+  gooeyItems.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var section = btn.getAttribute("data-section");
+      setMode("studio");
+      goTo(section, false);
+      closeGooey();
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (gooeyOpen() && !gooeyNav.contains(e.target)) closeGooey();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && gooeyOpen()) { closeGooey(); gooeyLauncher.focus(); }
+  });
+  function syncGooey(section) {
+    gooeyLabel.textContent = section.charAt(0).toUpperCase() + section.slice(1);
+    gooeyItems.forEach(function (b) {
+      b.classList.toggle("is-now", b.getAttribute("data-section") === section);
+    });
+  }
 
   /* ---------------- boot ---------------- */
   document.querySelectorAll(".t-tabs").forEach(function (tabs) {
