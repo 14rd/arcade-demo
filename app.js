@@ -20,13 +20,10 @@
     });
   }
   function unlock() {
-    document.body.classList.remove("locked");
-    try { sessionStorage.setItem(GATE_KEY, GATE_HASH); } catch (e) {}
+    document.documentElement.classList.add("unlocked");
+    try { localStorage.setItem(GATE_KEY, GATE_HASH); } catch (e) {}
     window.dispatchEvent(new Event("resize"));
   }
-  try {
-    if (sessionStorage.getItem(GATE_KEY) === GATE_HASH) document.body.classList.remove("locked");
-  } catch (e) {}
   gateForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var value = gateInput.value;

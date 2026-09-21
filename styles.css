@@ -36,22 +36,24 @@ button{font-family:var(--sans); color:inherit; cursor:pointer;}
 input,textarea,select{font-family:var(--sans); color:var(--ink);}
 :focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
 
-/* ---------- gate ---------- */
-body.locked .top, body.locked .stage, body.locked .dock,
-body.locked .gooey, body.locked .watch, body.locked .toast{display:none !important;}
+/* ---------- gate (full-screen lock; critical show/hide rules are inlined in <head>) ---------- */
 .gate{
   position:fixed; inset:0; z-index:100; background:var(--paper);
-  display:none; align-items:center; justify-content:center; padding:24px;
+  display:flex; align-items:center; justify-content:center; padding:24px;
 }
-body.locked .gate{display:flex;}
-.gate-box{display:flex; flex-direction:column; align-items:flex-start; gap:14px; width:min(340px, 100%);}
-.gate-mark{font-weight:700; font-size:16px; letter-spacing:.02em; display:flex; align-items:baseline; gap:12px;}
-.gate-mark .mono{font-size:9px; color:var(--grey);}
-.gate-sub{color:var(--grey); font-size:13.5px;}
-.gate-form{display:flex; gap:8px; width:100%; margin-top:6px;}
+.gate-box{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  gap:18px; width:min(360px, 100%);
+  padding-bottom:6vh;
+}
+.gate-eyebrow{font-size:9px; color:var(--grey);}
+.gate-mark{
+  font-weight:600; font-size:clamp(40px,9vw,56px); letter-spacing:-.03em; line-height:1;
+}
+.gate-form{display:flex; gap:8px; width:100%; margin-top:10px;}
 .gate-input{
   flex:1; min-width:0; border:1px solid var(--line-strong); background:var(--card);
-  border-radius:48px; padding:11px 18px; font-size:16px;
+  border-radius:48px; padding:12px 20px; font-size:16px; text-align:center;
 }
 .gate-input:focus{outline:none; border-color:var(--ink);}
 .gate-btn{margin-left:0;}

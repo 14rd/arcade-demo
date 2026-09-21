@@ -9,15 +9,32 @@
 <link rel="preload" href="fonts/Switzer-Semibold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/FragmentMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* critical gate rules — inline so the lock is the first paint, always */
+  html:not(.unlocked) .top,
+  html:not(.unlocked) .stage,
+  html:not(.unlocked) .dock,
+  html:not(.unlocked) .gooey,
+  html:not(.unlocked) .watch,
+  html:not(.unlocked) .toast{display:none !important;}
+  html.unlocked .gate{display:none !important;}
+</style>
+<script>
+  try{
+    if(localStorage.getItem("arcade-gate")==="60d194c6f504e1f2140a8df17fd37d0a3d9c44b1a75917096502ad166d6d6748"){
+      document.documentElement.classList.add("unlocked");
+    }
+  }catch(e){}
+</script>
 </head>
-<body class="locked">
+<body>
 
 <div class="gate" id="gate">
   <div class="gate-box">
-    <div class="gate-mark">Arcade<span class="mono">Structure demo</span></div>
-    <p class="gate-sub">A private prototype by Studio Subtract.</p>
+    <div class="gate-eyebrow mono">Private prototype · Studio Subtract</div>
+    <div class="gate-mark">Arcade.</div>
     <form class="gate-form" id="gate-form">
-      <input class="gate-input" id="gate-input" type="password" placeholder="Password" autocomplete="off" autofocus>
+      <input class="gate-input" id="gate-input" type="password" placeholder="Password" autocomplete="off" autofocus aria-label="Password">
       <button class="btn btn--primary gate-btn" type="submit">Enter</button>
     </form>
     <p class="gate-err mono" id="gate-err" hidden>That's not it. Try again.</p>
