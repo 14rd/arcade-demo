@@ -501,18 +501,10 @@
 <nav class="gooey" id="gooey" aria-label="Sections" data-open="false">
   <svg class="gooey-goo" viewBox="0 0 240 486" aria-hidden="true" focusable="false">
     <defs>
-      <filter id="goo-filter" filterUnits="userSpaceOnUse" x="-80" y="-80" width="400" height="646" color-interpolation-filters="sRGB">
+      <filter id="goo-filter" filterUnits="userSpaceOnUse" x="-40" y="-40" width="320" height="566" color-interpolation-filters="sRGB">
         <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
         <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"/>
-        <feComposite in="SourceGraphic" in2="goo" operator="atop" result="shape"/>
-        <feGaussianBlur in="shape" stdDeviation="9" result="sh-b"/>
-        <feOffset in="sh-b" dy="6" result="sh-o"/>
-        <feFlood flood-color="#000000" flood-opacity="0.22" result="sh-c"/>
-        <feComposite in="sh-c" in2="sh-o" operator="in" result="sh"/>
-        <feMerge>
-          <feMergeNode in="sh"/>
-          <feMergeNode in="shape"/>
-        </feMerge>
+        <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
       </filter>
     </defs>
     <g filter="url(#goo-filter)">

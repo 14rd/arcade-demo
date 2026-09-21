@@ -432,29 +432,30 @@ button.chip:hover{border-color:var(--ink); color:var(--ink);}
 }
 .gooey-item{
   position:absolute; left:42px; bottom:8px; width:156px; height:48px;
-  border:0; border-radius:48px; background:transparent; color:var(--paper);
+  border:0; border-radius:48px; background:var(--ink); color:var(--paper);
+  box-shadow:0 8px 24px rgba(20,20,20,.24);
   font-size:14px; font-weight:600; text-align:center;
   pointer-events:none; transform:translate(0,0);
-  opacity:0; filter:blur(2px);
+  opacity:0;
   transition:transform var(--goo-in) var(--goo-ease-in),
-             opacity 140ms ease, filter 140ms ease;
-  transition-delay:calc((5 - var(--i, 0)) * var(--goo-stagger)), 0ms, 0ms;
+             opacity 120ms ease;
+  transition-delay:calc((5 - var(--i, 0)) * var(--goo-stagger)), 0ms;
   will-change:transform;
 }
 .gooey[data-open="true"] .gooey-item{
   pointer-events:auto;
   transform:translate(0, var(--fy, 0px));
-  opacity:1; filter:blur(0);
+  opacity:1;
   transition:transform var(--goo-out) var(--goo-ease-out),
-             opacity 180ms ease, filter 180ms ease;
+             opacity 120ms ease;
   transition-delay:calc(var(--i, 0) * var(--goo-stagger)),
-                   calc(var(--i, 0) * var(--goo-stagger) + 90ms),
-                   calc(var(--i, 0) * var(--goo-stagger) + 90ms);
+                   calc(var(--i, 0) * var(--goo-stagger));
 }
 .gooey-item.is-now{color:var(--orange);}
 .gooey-launcher{
   position:absolute; left:42px; bottom:8px; width:156px; height:48px;
-  border:0; border-radius:48px; background:transparent; color:var(--paper);
+  border:0; border-radius:48px; background:var(--ink); color:var(--paper);
+  box-shadow:0 8px 24px rgba(20,20,20,.24);
   font-size:14px; font-weight:600; pointer-events:auto;
   display:flex; align-items:center; justify-content:center; gap:10px;
 }
